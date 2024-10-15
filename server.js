@@ -18,7 +18,7 @@ const PASSWORD = process.env.MONGODB_PASSWORD;
 
 app.set("trust proxy", 1); //added proxy here
 
-mongoose
+mongoose      // database connection
   .connect(
     `mongodb+srv://${USERNAME}:${PASSWORD}@cluster0.8cpbt.mongodb.net/Codedeck?retryWrites=true&w=majority&appName=Cluster0`
   )
@@ -61,7 +61,7 @@ const corsOptions = {
     if (!origin || allowedOrigins.includes(origin)) {
       callback(null, true); // Allow the origin.
     } else {
-      callback(new Error("Not allowed by CORS")); // Deny the origin
+      callback(new Error("Not allowed by CORS")); // Deny the origin.
     }
   },
   credentials: true, // Allow credentials (cookies, headers, etc.)
