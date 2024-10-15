@@ -1,0 +1,42 @@
+name: Deploy Node Application
+
+on:
+  push: 
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Create .env file
+        run: |
+          echo "MONGODB_USERNAME=${{ secrets.MONGODB_USERNAME }}" >> .env
+          echo "MONGODB_PASSWORD=${{ secrets.MONGODB_PASSWORD }}" >> .env
+          echo "SUPER_SECRET_KEY=${{ secrets.SUPER_SECRET_KEY }}" >> .env
+          echo "PORT=${{ secrets.PORT }}" >> .env
+
+      - name: Login to docker hub
+        run: docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+      
+      - name: Build docker image
+        run: docker build -t kishanthorat111/cookie-server-backend .  
+
+      - name: Publish image to docker hub
+        run: docker push kishanthorat111/cookie-server-backend:latest
+        
+  deploy:
+    needs: build
+    runs-on: self-hosted
+    steps:
+      - name: Pull image from docker hub
+        run: docker pull kishanthorat111/cookie-server-backend:latest
+      
+      - name: Delete old container
+        run: docker rm -f cookie-server-backend-container  
+      
+      - name: Run docker container
+        run: docker run -d -p 4000:4000 --name cookie-server-backend-container kishanthorat111/cookie-server-backend
