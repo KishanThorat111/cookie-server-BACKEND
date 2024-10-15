@@ -98,6 +98,11 @@ app.use(
 
 
 
+// Route to show backend status
+app.get("/", (req, res) => {
+  res.send("Backend is running successfully!");
+});
+
 // Registration
 app.post("/sign-up", async (req, res) => {
   try {
