@@ -49,9 +49,10 @@ app.use(express.json());
 
 
 const allowedOrigins = [
-  "https://ecommerceapplication-9de8.onrender.com",  // Added Render.com frontend URL here
-  "http://localhost:4200", // Local development
-  "https://ecommerceapplication-backend.onrender.com", // Added Render.com backend URL here
+  "https://angular.ecommerceweb.shop",
+  //"https://ecommerceapplication-9de8.onrender.com",  // Added Render.com frontend URL here
+  //"http://localhost:4200", // Local development
+  //"https://ecommerceapplication-backend.onrender.com", // Added Render.com backend URL here
 
 ];
 
