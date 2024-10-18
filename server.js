@@ -19,7 +19,7 @@ const USERNAME = process.env.MONGODB_USERNAME;
 const PASSWORD = process.env.MONGODB_PASSWORD;
 
 // Trust the first proxy
-app.set("trust proxy", 1);
+//app.set("trust proxy", 1);
 
 // Connect to MongoDB using Mongoose
 mongoose
