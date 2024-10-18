@@ -19,7 +19,7 @@ const USERNAME = process.env.MONGODB_USERNAME;
 const PASSWORD = process.env.MONGODB_PASSWORD;
 
 // Trust the first proxy
-//app.set("trust proxy", 1);
+app.set("trust proxy", 1);
 
 // Connect to MongoDB using Mongoose
 mongoose
@@ -43,29 +43,29 @@ db.once("open", function () {
 // Middleware to parse incoming JSON requests
 app.use(express.json());
 
-// CORS configuration
-const allowedOrigins = [
-  "https://angular.ecommerceweb.shop",
-  "https://nodejs.ecommerceweb.shop",
-  "https://ecommerceapplication-9de8.onrender.com",
-  "http://localhost:4200", // Local development
-  "https://ecommerceapplication-backend.onrender.com", // Add your Render.com backend URL here
-];
+// // CORS configuration
+// const allowedOrigins = [
+//   "https://angular.ecommerceweb.shop",
+//   "https://nodejs.ecommerceweb.shop",
+//   "https://ecommerceapplication-9de8.onrender.com",
+//   "http://localhost:4200", // Local development
+//   "https://ecommerceapplication-backend.onrender.com", // Add your Render.com backend URL here
+// ];
 
-const corsOptions = {
-  origin: (origin, callback) => {
-    // Allow requests with no origin (like mobile apps or Postman)
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true); // Allow the origin
-    } else {
-      callback(new Error("Not allowed by CORS")); // Deny the origin
-    }
-  },
-  credentials: true, // Allow credentials (cookies, headers, etc.)
-};
+// const corsOptions = {
+//   origin: (origin, callback) => {
+//     // Allow requests with no origin (like mobile apps or Postman)
+//     if (!origin || allowedOrigins.includes(origin)) {
+//       callback(null, true); // Allow the origin
+//     } else {
+//       callback(new Error("Not allowed by CORS")); // Deny the origin
+//     }
+//   },
+//   credentials: true, // Allow credentials (cookies, headers, etc.)
+// };
 
-// Enable CORS for the application
-app.use(cors(corsOptions));
+// // Enable CORS for the application
+// app.use(cors(corsOptions));
 
 // Middleware to create a session ID
 app.use(
